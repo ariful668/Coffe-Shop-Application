@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using CoffeShop.BLL;
 
 namespace CoffeShop
 {
     public partial class CustomerUI : Form
     {
+        CustomerManager _customerManager = new CustomerManager();
         public CustomerUI()
         {
             InitializeComponent();
@@ -20,228 +22,99 @@ namespace CoffeShop
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            add();
+            //Mandatory
+            if (String.IsNullOrEmpty(addressTextBox.Text))
+            {
+                MessageBox.Show("Address can not be Empty!!");
+                return;
+            }
+            if (String.IsNullOrEmpty(contactTextBox.Text))
+            {
+                MessageBox.Show("Contact can not be Empty!!");
+                return;
+            }
+
+            //Unique
+            if (_customerManager.IsNameExist(nameTextBox.Text))
+            {
+                MessageBox.Show(nameTextBox.Text + " Already Exist!!");
+                return;
+            }
+
+            //Add/Insert
+            if (_customerManager.Add(nameTextBox.Text, addressTextBox.Text, contactTextBox.Text))
+            {
+                MessageBox.Show("Saved");
+            }
+            else
+            {
+                MessageBox.Show("Not Saved");
+            }
+            //showDataGridView.DataSource = dataTable;
+            showDataGridView.DataSource = _customerManager.Display();
         }
 
         private void ShowButton_Click(object sender, EventArgs e)
         {
-            show();
+            showDataGridView.DataSource = _customerManager.Display();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            delete();
+            //Set Id as Mandatory
+            if (String.IsNullOrEmpty(idTextBox.Text))
+            {
+                MessageBox.Show("Id Can not be Empty!!!");
+                return;
+            }
+
+            //Delete
+            if (_customerManager.Delete(Convert.ToInt32(idTextBox.Text)))
+            {
+                MessageBox.Show("Deleted");
+            }
+            else
+            {
+                MessageBox.Show("Not Deleted");
+            }
+
+            showDataGridView.DataSource = _customerManager.Display();
         }
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-            update();
+            //Set Id as Mandatory
+            if (String.IsNullOrEmpty(idTextBox.Text))
+            {
+                MessageBox.Show("Id Can not be Empty!!!");
+                return;
+            }
+            //Set Address as Mandatory
+            if (String.IsNullOrEmpty(addressTextBox.Text))
+            {
+                MessageBox.Show("Address Can not be Empty!!!");
+                return;
+            }
+            if (String.IsNullOrEmpty(contactTextBox.Text))
+            {
+                MessageBox.Show("Contact can not be Empty!!");
+                return;
+            }
+
+            if (_customerManager.Update(nameTextBox.Text, addressTextBox.Text, contactTextBox.Text, Convert.ToInt32(idTextBox.Text)))
+            {
+                MessageBox.Show("Updated");
+                showDataGridView.DataSource = _customerManager.Display();
+            }
+            else
+            {
+                MessageBox.Show("Not Updated");
+            }
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            search();
-        }
-
-        public void add()
-        {
-            try
-            {
-                //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; DataBase=CoffeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command
-
-                string commandString = @"INSERT INTO  Customers (Name, Address, Contact) Values ('" + nameTextBox.Text + "', '" + addressTextBox.Text + "','" + contactTextBox.Text + "')";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                if (commandString.Contains(nameTextBox.Text))
-                {
-                    MessageBox.Show("Customer Name must be unique");
-                    return;
-                }
-                //Open
-                sqlConnection.Open();
-
-                //Execute
-                int isExecuted = sqlCommand.ExecuteNonQuery();
-
-                if (isExecuted > 0)
-                {
-                    MessageBox.Show("Saved");
-                }
-                else
-                {
-                    MessageBox.Show("Not Saved");
-                }
-
-                //Close
-                sqlConnection.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-        }
-        
-        public void show()
-        {
-            try
-            {
-                //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; DataBase=CoffeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command
-                //SELECT * FROM Customers
-                string commandString = @"SELECT * FROM Customers";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                //Open
-                sqlConnection.Open();
-
-                //Execute
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                if (dataTable.Rows.Count > 0)
-                {
-                    showDataGridView.DataSource = dataTable;
-                }
-                else
-                {
-                    showDataGridView.DataSource = null;
-                    MessageBox.Show("No Data Found");
-                }
-
-
-                //Close
-                sqlConnection.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-        }
-
-        public void delete()
-        {
-            try
-            {
-                //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; DataBase=CoffeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command
-
-                string commandString = @"delete from Customers where ID=" + idTextBox.Text + "";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                //Open
-                sqlConnection.Open();
-
-                //Execute
-                int isExecuted = sqlCommand.ExecuteNonQuery();
-
-                if (isExecuted > 0)
-                {
-                    MessageBox.Show("Deleted");
-                }
-                else
-                {
-                    MessageBox.Show("Not Deleted");
-                }
-
-                //Close
-                sqlConnection.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-        }
-
-        public void update()
-        {
-            try
-            {
-                //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; DataBase=CoffeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command
-
-                string commandString = @"update Customers set Name ='" + nameTextBox.Text + "',Address='" + addressTextBox.Text + "',Contact='" + contactTextBox.Text + "'Where ID=" + idTextBox.Text + "";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                //Open
-                sqlConnection.Open();
-
-                //Execute
-                int isExecuted = sqlCommand.ExecuteNonQuery();
-
-                if (isExecuted > 0)
-                {
-                    MessageBox.Show("Updated");
-                }
-                else
-                {
-                    MessageBox.Show("Not Updated");
-                }
-
-                //Close
-                sqlConnection.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-        }
-
-        public void search()
-        {
-            try
-            {
-                //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; DataBase=CoffeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command
-                //SELECT * FROM Customers
-                string commandString = @"SELECT * FROM Customers where ID=" + idTextBox.Text + "";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                //Open
-                sqlConnection.Open();
-
-                //Execute
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                if (dataTable.Rows.Count > 0)
-                {
-                    showDataGridView.DataSource = dataTable;
-                }
-                else
-                {
-                    showDataGridView.DataSource = null;
-                    MessageBox.Show("No Data Found");
-                }
-
-
-                //Close
-                sqlConnection.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-        }
+            showDataGridView.DataSource = _customerManager.Search(nameTextBox.Text);
+        } 
     }
 }

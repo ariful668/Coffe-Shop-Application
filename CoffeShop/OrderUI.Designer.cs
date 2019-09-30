@@ -54,7 +54,7 @@
             this.SearchButton.TabIndex = 23;
             this.SearchButton.Text = "Search";
             this.SearchButton.UseVisualStyleBackColor = false;
-            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            this.SearchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // updateButton
             // 
@@ -67,7 +67,7 @@
             this.updateButton.TabIndex = 22;
             this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = false;
-            this.updateButton.Click += new System.EventHandler(this.UpdateButton_Click);
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // idTextBox
             // 
@@ -100,7 +100,7 @@
             this.deleteButton.TabIndex = 19;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = false;
-            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // showDataGridView
             // 
@@ -121,7 +121,7 @@
             this.showButton.TabIndex = 17;
             this.showButton.Text = "Show";
             this.showButton.UseVisualStyleBackColor = false;
-            this.showButton.Click += new System.EventHandler(this.ShowButton_Click);
+            this.showButton.Click += new System.EventHandler(this.showButton_Click);
             // 
             // addButton
             // 
@@ -134,7 +134,7 @@
             this.addButton.TabIndex = 16;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = false;
-            this.addButton.Click += new System.EventHandler(this.AddButton_Click);
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // qtyTextBox
             // 

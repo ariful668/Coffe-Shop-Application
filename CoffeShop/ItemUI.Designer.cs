@@ -161,7 +161,7 @@
             this.updateButton.TabIndex = 10;
             this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = false;
-            this.updateButton.Click += new System.EventHandler(this.UpdateButton_Click);
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // SearchButton
             // 
@@ -174,7 +174,7 @@
             this.SearchButton.TabIndex = 11;
             this.SearchButton.Text = "Search";
             this.SearchButton.UseVisualStyleBackColor = false;
-            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            this.SearchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // ItemUI
             // 

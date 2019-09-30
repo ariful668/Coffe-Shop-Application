@@ -21,3 +21,16 @@ C:\Users\arifu\Downloads\CoffeShop-20190928T141426Z-001\CoffeShop\CoffeShop\obj\
 C:\Users\arifu\Downloads\CoffeShop-20190928T141426Z-001\CoffeShop\CoffeShop\obj\Debug\CoffeShop.CustomerUI.resources
 C:\Users\arifu\Downloads\CoffeShop-20190928T141426Z-001\CoffeShop\CoffeShop\obj\Debug\CoffeShop.Home.resources
 C:\Users\arifu\Downloads\CoffeShop-20190928T141426Z-001\CoffeShop\CoffeShop\obj\Debug\CoffeShop.OrderUI.resources
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\bin\Debug\CoffeShop.exe.config
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\bin\Debug\CoffeShop.exe
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\bin\Debug\CoffeShop.pdb
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\obj\Debug\CoffeShop.csprojAssemblyReference.cache
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\obj\Debug\CoffeShop.CustomerUI.resources
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\obj\Debug\CoffeShop.Home.resources
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\obj\Debug\CoffeShop.ItemUI.resources
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\obj\Debug\CoffeShop.OrderUI.resources
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\obj\Debug\CoffeShop.Properties.Resources.resources
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\obj\Debug\CoffeShop.csproj.GenerateResource.cache
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\obj\Debug\CoffeShop.csproj.CoreCompileInputs.cache
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\obj\Debug\CoffeShop.exe
+E:\BITM\Day9\Coffe-Shop-Application\CoffeShop\obj\Debug\CoffeShop.pdb

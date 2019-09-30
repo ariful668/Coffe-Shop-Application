@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient; 
-
+using System.Data.SqlClient;
+using CoffeShop.BLL;
 namespace CoffeShop
 {
     public partial class ItemUI : Form
     {
+        ItemManager _itemManager = new ItemManager();
         public ItemUI()
         {
             InitializeComponent();
@@ -20,226 +21,90 @@ namespace CoffeShop
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            add();
+            //Mandatory
+            if (String.IsNullOrEmpty(priceTextBox.Text))
+            {
+                MessageBox.Show("Price can not be Empty!!");
+                return;
+            }
+
+            //Unique
+            if (_itemManager.IsNameExist(nameTextBox.Text))
+            {
+                MessageBox.Show(nameTextBox.Text + " Already Exist!!");
+                return;
+            }
+
+            //Add/Insert
+            if (_itemManager.Add(nameTextBox.Text, Convert.ToDouble(priceTextBox.Text)))
+            {
+                MessageBox.Show("Saved");
+            }
+            else
+            {
+                MessageBox.Show("Not Saved");
+            }
+            //showDataGridView.DataSource = dataTable;
+            showDataGridView.DataSource = _itemManager.Display();
         }
 
         private void showButton_Click(object sender, EventArgs e)
         {
-            show();
+            showDataGridView.DataSource = _itemManager.Display();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            delete();
-        }
-
-        private void UpdateButton_Click(object sender, EventArgs e)
-        {
-            update();
-        }
-
-        private void SearchButton_Click(object sender, EventArgs e)
-        {
-            search();
-        }
-
-        public void add()
-        {
-            try
+            //Set Id as Mandatory
+            if (String.IsNullOrEmpty(idTextBox.Text))
             {
-                //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; DataBase=CoffeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command
-
-                string commandString = @"INSERT INTO  Items (Name, Price) Values ('" + nameTextBox.Text + "', " + priceTextBox.Text + ")";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                if (!commandString.Contains(nameTextBox.Text))
-                {
-                    MessageBox.Show("Item must be unique");
-                    return;
-                }
-
-                //Open
-                sqlConnection.Open();
-
-                //Execute
-                int isExecuted = sqlCommand.ExecuteNonQuery();
-
-                if (isExecuted > 0)
-                {
-                    MessageBox.Show("Saved");
-                }
-                else
-                {
-                    MessageBox.Show("Not Saved");
-                }
-
-                //Close
-                sqlConnection.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-        }
-        public void show()
-        {
-            try
-            {
-                //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; DataBase=CoffeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command
-                //SELECT * FROM Customers
-                string commandString = @"SELECT * FROM Items";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                //Open
-                sqlConnection.Open();
-
-                //Execute
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                if (dataTable.Rows.Count > 0)
-                {
-                    showDataGridView.DataSource = dataTable;
-                }
-                else
-                {
-                    showDataGridView.DataSource = null;
-                    MessageBox.Show("No Data Found");
-                }
-
-
-                //Close
-                sqlConnection.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show("Id Can not be Empty!!!");
                 return;
             }
 
-        }
-        public void delete()
-        {
-            try
+            //Delete
+            if (_itemManager.Delete(Convert.ToInt32(idTextBox.Text)))
             {
-                //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; DataBase=CoffeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command
-
-                string commandString = @"delete from items where ID=" + idTextBox.Text + "";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                //Open
-                sqlConnection.Open();
-
-                //Execute
-                int isExecuted = sqlCommand.ExecuteNonQuery();
-
-                if (isExecuted > 0)
-                {
-                    MessageBox.Show("Deleted");
-                }
-                else
-                {
-                    MessageBox.Show("Not Deleted");
-                }
-
-                //Close
-                sqlConnection.Close();
+                MessageBox.Show("Deleted");
             }
-            catch (Exception exception)
+            else
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show("Not Deleted");
+            }
+
+            showDataGridView.DataSource = _itemManager.Display();
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            //Set Id as Mandatory
+            if (String.IsNullOrEmpty(idTextBox.Text))
+            {
+                MessageBox.Show("Id Can not be Empty!!!");
                 return;
             }
-        }
-        public void update()
-        {
-            try
+            //Set Price as Mandatory
+            if (String.IsNullOrEmpty(priceTextBox.Text))
             {
-                //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; DataBase=CoffeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command
-
-                string commandString = @"update Items set Name ='" + nameTextBox.Text + "',Price='" + priceTextBox.Text + "'Where ID=" + idTextBox.Text + "";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                //Open
-                sqlConnection.Open();
-
-                //Execute
-                int isExecuted = sqlCommand.ExecuteNonQuery();
-
-                if (isExecuted > 0)
-                {
-                    MessageBox.Show("Updated");
-                }
-                else
-                {
-                    MessageBox.Show("Not Updated");
-                }
-
-                //Close
-                sqlConnection.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show("Price Can not be Empty!!!");
                 return;
             }
+
+            if (_itemManager.Update(nameTextBox.Text, Convert.ToDouble(priceTextBox.Text), Convert.ToInt32(idTextBox.Text)))
+            {
+                MessageBox.Show("Updated");
+                showDataGridView.DataSource = _itemManager.Display();
+            }
+            else
+            {
+                MessageBox.Show("Not Updated");
+            }
         }
-        public void search()
+
+        private void searchButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; DataBase=CoffeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command
-                //SELECT * FROM Customers
-                string commandString = @"SELECT * FROM Items where ID=" + idTextBox.Text + "";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                //Open
-                sqlConnection.Open();
-
-                //Execute
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                if (dataTable.Rows.Count > 0)
-                {
-                    showDataGridView.DataSource = dataTable;
-                }
-                else
-                {
-                    showDataGridView.DataSource = null;
-                    MessageBox.Show("No Data Found");
-                }
-
-
-                //Close
-                sqlConnection.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
+            showDataGridView.DataSource = _itemManager.Search(nameTextBox.Text);
         }
+
     }
 }
