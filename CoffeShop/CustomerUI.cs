@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using CoffeShop.BLL;
+using CoffeShop.Model;
 
 namespace CoffeShop
 {
@@ -22,6 +23,7 @@ namespace CoffeShop
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+            Customer customer = new Customer();
             //Mandatory
             if (String.IsNullOrEmpty(addressTextBox.Text))
             {
@@ -34,15 +36,19 @@ namespace CoffeShop
                 return;
             }
 
+            customer.Address = addressTextBox.Text;
+            customer.Contact = contactTextBox.Text;
+
+            customer.Name = nameTextBox.Text;
             //Unique
-            if (_customerManager.IsNameExist(nameTextBox.Text))
+            if (_customerManager.IsNameExist(customer))
             {
                 MessageBox.Show(nameTextBox.Text + " Already Exist!!");
                 return;
             }
 
             //Add/Insert
-            if (_customerManager.Add(nameTextBox.Text, addressTextBox.Text, contactTextBox.Text))
+            if (_customerManager.Add(customer))
             {
                 MessageBox.Show("Saved");
             }
@@ -61,6 +67,7 @@ namespace CoffeShop
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
+            Customer customer = new Customer();
             //Set Id as Mandatory
             if (String.IsNullOrEmpty(idTextBox.Text))
             {
@@ -68,8 +75,10 @@ namespace CoffeShop
                 return;
             }
 
+            customer.Id = Convert.ToInt32(idTextBox.Text);
+
             //Delete
-            if (_customerManager.Delete(Convert.ToInt32(idTextBox.Text)))
+            if (_customerManager.Delete(customer))
             {
                 MessageBox.Show("Deleted");
             }
@@ -83,6 +92,7 @@ namespace CoffeShop
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
+            Customer customer = new Customer();
             //Set Id as Mandatory
             if (String.IsNullOrEmpty(idTextBox.Text))
             {
@@ -101,7 +111,12 @@ namespace CoffeShop
                 return;
             }
 
-            if (_customerManager.Update(nameTextBox.Text, addressTextBox.Text, contactTextBox.Text, Convert.ToInt32(idTextBox.Text)))
+            customer.Id = Convert.ToInt32(idTextBox.Text);
+            customer.Name = nameTextBox.Text;
+            customer.Address = addressTextBox.Text;
+            customer.Contact = contactTextBox.Text;
+
+            if (_customerManager.Update(customer))
             {
                 MessageBox.Show("Updated");
                 showDataGridView.DataSource = _customerManager.Display();

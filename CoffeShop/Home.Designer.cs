@@ -37,7 +37,7 @@
             // customerButton
             // 
             this.customerButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.customerButton.ForeColor = System.Drawing.Color.Black;
             this.customerButton.Location = new System.Drawing.Point(182, 217);
             this.customerButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.customerButton.Name = "customerButton";
@@ -50,7 +50,7 @@
             // itemButton
             // 
             this.itemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.itemButton.ForeColor = System.Drawing.SystemColors.MenuText;
             this.itemButton.Location = new System.Drawing.Point(436, 217);
             this.itemButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.itemButton.Name = "itemButton";
@@ -63,7 +63,7 @@
             // OrderButton
             // 
             this.OrderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OrderButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.OrderButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.OrderButton.Location = new System.Drawing.Point(660, 217);
             this.OrderButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.OrderButton.Name = "OrderButton";
@@ -89,6 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Aqua;
             this.ClientSize = new System.Drawing.Size(935, 692);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OrderButton);

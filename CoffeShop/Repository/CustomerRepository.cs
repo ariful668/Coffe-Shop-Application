@@ -5,22 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using CoffeShop.Model;
 
 namespace CoffeShop.Repository
 {
     public class CustomerRepository
     {
-        public bool Add(string name, string address, string contact)
+        public bool Add(Customer customer)
         {
             bool isAdded = false;
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeShop; Integrated Security=True";
+                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
-                string commandString = @"INSERT INTO Customers (Name, Address, Contact) Values ('" + name + "','" + address + "', '" + contact + "')";
+                string commandString = @"INSERT INTO Customers (Name, Address, Contact) Values ('" + customer.Name + "','" + customer.Address + "', '" + customer.Contact + "')";
                 SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
 
                 //Open
@@ -45,17 +46,17 @@ namespace CoffeShop.Repository
         
 }
 
-        public bool IsNameExist(string name)
+        public bool IsNameExist(Customer customer)
         {
             bool isExist = false;
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeShop; Integrated Security=True";
+                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
-                string commandString = @"SELECT * FROM Customers WHERE Name='" + name + "'";
+                string commandString = @"SELECT * FROM Customers WHERE Name='" + customer.Name + "'";
                 SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
 
                 //Open
@@ -82,16 +83,16 @@ namespace CoffeShop.Repository
             return isExist;
         }
 
-        public bool Update(string name, string address, string contact, int id)
+        public bool Update(Customer customer)
         {
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeShop; Integrated Security=True";
+                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
-                string commandString = @"UPDATE Items SET Name =  '" + name + "' , Address = '" + address + "', Contact = '" + contact + "' WHERE ID = " + id + "";
+                string commandString = @"UPDATE Items SET Name =  '" + customer.Name + "' , Address = '" + customer.Address + "', Contact = '" + customer.Contact + "' WHERE ID = " + customer.Id + "";
                 SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
 
                 //Open
@@ -118,7 +119,7 @@ namespace CoffeShop.Repository
         {
            
                 //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeShop; Integrated Security=True";
+                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -140,16 +141,16 @@ namespace CoffeShop.Repository
             
         }
 
-        public bool Delete(int id)
+        public bool Delete(Customer customer)
         {
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeeShop; Integrated Security=True";
+                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
-                string commandString = @"DELETE FROM Customers WHERE ID = " + id + "";
+                string commandString = @"DELETE FROM Customers WHERE ID = " + customer.Id + "";
                 SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
 
                 //Open
@@ -180,7 +181,7 @@ namespace CoffeShop.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeShop; Integrated Security=True";
+                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 

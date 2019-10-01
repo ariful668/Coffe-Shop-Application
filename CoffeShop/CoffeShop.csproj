@@ -67,6 +67,8 @@
     <Compile Include="ItemUI.Designer.cs">
       <DependentUpon>ItemUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Item.cs" />
     <Compile Include="OrderUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +101,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\CoffeShop.Model.Item.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

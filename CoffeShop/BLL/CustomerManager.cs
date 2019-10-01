@@ -5,25 +5,26 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 using CoffeShop.Repository;
+using CoffeShop.Model;
 
 namespace CoffeShop.BLL
 {
     public class CustomerManager
     {
         CustomerRepository _customerRepository = new CustomerRepository();
-        public bool Add(string name, string address, string contact)
+        public bool Add(Customer customer)
         {
-            return _customerRepository.Add(name, address,contact);
+            return _customerRepository.Add(customer);
         }
 
-        public bool IsNameExist(string name)
+        public bool IsNameExist(Customer customer)
         {
-            return _customerRepository.IsNameExist(name);
+            return _customerRepository.IsNameExist(customer);
         }
 
-        public bool Update(string name, string address, string contact, int id)
+        public bool Update(Customer customer)
         {
-            return _customerRepository.Update(name, address, contact, id);
+            return _customerRepository.Update(customer);
         }
 
         public DataTable Display()
@@ -31,9 +32,9 @@ namespace CoffeShop.BLL
             return _customerRepository.Display();
         }
 
-        public bool Delete(int id)
+        public bool Delete(Customer customer)
         {
-            return _customerRepository.Delete(id);
+            return _customerRepository.Delete(customer);
         }
         public DataTable Search(string name)
         {

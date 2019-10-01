@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using CoffeShop.BLL;
+using CoffeShop.Model;
 namespace CoffeShop
 {
     public partial class ItemUI : Form
@@ -21,22 +22,25 @@ namespace CoffeShop
 
         private void addButton_Click(object sender, EventArgs e)
         {
+            Item item = new Item();
+            
             //Mandatory
             if (String.IsNullOrEmpty(priceTextBox.Text))
             {
                 MessageBox.Show("Price can not be Empty!!");
                 return;
             }
-
+            item.Price = Convert.ToDouble(priceTextBox.Text);
+            item.Name = nameTextBox.Text;
             //Unique
-            if (_itemManager.IsNameExist(nameTextBox.Text))
+            if (_itemManager.IsNameExist(item))
             {
                 MessageBox.Show(nameTextBox.Text + " Already Exist!!");
                 return;
             }
 
             //Add/Insert
-            if (_itemManager.Add(nameTextBox.Text, Convert.ToDouble(priceTextBox.Text)))
+            if (_itemManager.Add(item))
             {
                 MessageBox.Show("Saved");
             }
@@ -55,15 +59,18 @@ namespace CoffeShop
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            //Set Id as Mandatory
-            if (String.IsNullOrEmpty(idTextBox.Text))
-            {
-                MessageBox.Show("Id Can not be Empty!!!");
-                return;
-            }
+            Item item = new Item();
+            ////Set Id as Mandatory
+            //if (String.IsNullOrEmpty(idTextBox.Text))
+            //{
+            //    MessageBox.Show("Id Can not be Empty!!!");
+            //    return;
+            //}
 
+            item.Id = Convert.ToInt32(itemComboBox.SelectedValue);
+             
             //Delete
-            if (_itemManager.Delete(Convert.ToInt32(idTextBox.Text)))
+            if (_itemManager.Delete(item))
             {
                 MessageBox.Show("Deleted");
             }
@@ -77,6 +84,7 @@ namespace CoffeShop
 
         private void updateButton_Click(object sender, EventArgs e)
         {
+            Item item = new Item();
             //Set Id as Mandatory
             if (String.IsNullOrEmpty(idTextBox.Text))
             {
@@ -90,7 +98,10 @@ namespace CoffeShop
                 return;
             }
 
-            if (_itemManager.Update(nameTextBox.Text, Convert.ToDouble(priceTextBox.Text), Convert.ToInt32(idTextBox.Text)))
+            item.Id = Convert.ToInt32(idTextBox.Text);
+            item.Name = nameTextBox.Text;
+            item.Price = Convert.ToDouble(priceTextBox.Text); 
+            if (_itemManager.Update(item))
             {
                 MessageBox.Show("Updated");
                 showDataGridView.DataSource = _itemManager.Display();
@@ -106,5 +117,9 @@ namespace CoffeShop
             showDataGridView.DataSource = _itemManager.Search(nameTextBox.Text);
         }
 
+        private void ItemUI_Load(object sender, EventArgs e)
+        {
+            itemComboBox.DataSource = _itemManager.itemCombo();
+        }
     }
 }

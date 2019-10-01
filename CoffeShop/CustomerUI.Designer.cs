@@ -109,7 +109,7 @@
             this.showDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.showDataGridView.Location = new System.Drawing.Point(132, 305);
             this.showDataGridView.Name = "showDataGridView";
-            this.showDataGridView.Size = new System.Drawing.Size(343, 133);
+            this.showDataGridView.Size = new System.Drawing.Size(444, 146);
             this.showDataGridView.TabIndex = 18;
             // 
             // showButton
@@ -203,7 +203,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 478);
             this.Controls.Add(this.contactTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.SearchButton);
