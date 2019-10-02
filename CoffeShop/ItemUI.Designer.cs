@@ -41,7 +41,6 @@
             this.id = new System.Windows.Forms.Label();
             this.updateButton = new System.Windows.Forms.Button();
             this.SearchButton = new System.Windows.Forms.Button();
-            this.itemComboBox = new System.Windows.Forms.ComboBox();
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.showDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
@@ -120,6 +119,7 @@
             this.showDataGridView.Name = "showDataGridView";
             this.showDataGridView.Size = new System.Drawing.Size(343, 133);
             this.showDataGridView.TabIndex = 6;
+            this.showDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShowDataGridView_CellClick);
             // 
             // deleteButton
             // 
@@ -180,17 +180,6 @@
             this.SearchButton.UseVisualStyleBackColor = false;
             this.SearchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
-            // itemComboBox
-            // 
-            this.itemComboBox.DataSource = this.itemBindingSource;
-            this.itemComboBox.DisplayMember = "Name";
-            this.itemComboBox.FormattingEnabled = true;
-            this.itemComboBox.Location = new System.Drawing.Point(376, 45);
-            this.itemComboBox.Name = "itemComboBox";
-            this.itemComboBox.Size = new System.Drawing.Size(121, 21);
-            this.itemComboBox.TabIndex = 12;
-            this.itemComboBox.ValueMember = "Id";
-            // 
             // itemBindingSource
             // 
             this.itemBindingSource.DataSource = typeof(CoffeShop.Model.Item);
@@ -201,7 +190,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.itemComboBox);
             this.Controls.Add(this.SearchButton);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.idTextBox);
@@ -216,7 +204,6 @@
             this.Controls.Add(this.label1);
             this.Name = "ItemUI";
             this.Text = "ItemUI";
-            this.Load += new System.EventHandler(this.ItemUI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.showDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -238,7 +225,6 @@
         private System.Windows.Forms.Label id;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button SearchButton;
-        private System.Windows.Forms.ComboBox itemComboBox;
         private System.Windows.Forms.BindingSource itemBindingSource;
     }
 }

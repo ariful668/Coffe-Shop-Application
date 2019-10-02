@@ -5,25 +5,22 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 using CoffeShop.Repository;
+using CoffeShop.Model;
 
 namespace CoffeShop.BLL
 {
     public class OrderManager
     {
         OrderRepository _orderRepository = new OrderRepository();
-        public bool Add(string name, int qty)
+        public bool Add(Order order)
         {
-            return _orderRepository.Add(name, qty);
+            return _orderRepository.Add(order);
         }
 
-        public bool IsNameExist(string name)
-        {
-            return _orderRepository.IsNameExist(name);
-        }
 
-        public bool Update(string name, int qty, int id)
+        public bool Update(Order order)
         {
-            return _orderRepository.Update(name, qty, id);
+            return _orderRepository.Update(order);
         }
 
         public DataTable Display()
@@ -31,13 +28,21 @@ namespace CoffeShop.BLL
             return _orderRepository.Display();
         }
 
-        public bool Delete(int id)
+        public bool Delete(Order order)
         {
-            return _orderRepository.Delete(id);
+            return _orderRepository.Delete(order);
         }
         public DataTable Search(string name)
         {
             return _orderRepository.Search(name);
+        }
+        public DataTable itemCombo()
+        {
+            return _orderRepository.itemCombo();
+        }
+        public DataTable customerCombo()
+        {
+            return _orderRepository.customerCombo();
         }
     }
 }

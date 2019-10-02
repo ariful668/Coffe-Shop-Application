@@ -15,6 +15,7 @@ namespace CoffeShop
     public partial class ItemUI : Form
     {
         ItemManager _itemManager = new ItemManager();
+        int indexRow;
         public ItemUI()
         {
             InitializeComponent();
@@ -60,14 +61,14 @@ namespace CoffeShop
         private void deleteButton_Click(object sender, EventArgs e)
         {
             Item item = new Item();
-            ////Set Id as Mandatory
-            //if (String.IsNullOrEmpty(idTextBox.Text))
-            //{
-            //    MessageBox.Show("Id Can not be Empty!!!");
-            //    return;
-            //}
+            //Set Id as Mandatory
+            if (String.IsNullOrEmpty(idTextBox.Text))
+            {
+                MessageBox.Show("Id Can not be Empty!!!");
+                return;
+            }
 
-            item.Id = Convert.ToInt32(itemComboBox.SelectedValue);
+            item.Id = Convert.ToInt32(idTextBox.Text);
              
             //Delete
             if (_itemManager.Delete(item))
@@ -117,9 +118,13 @@ namespace CoffeShop
             showDataGridView.DataSource = _itemManager.Search(nameTextBox.Text);
         }
 
-        private void ItemUI_Load(object sender, EventArgs e)
+        private void ShowDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            itemComboBox.DataSource = _itemManager.itemCombo();
+            indexRow = e.RowIndex;
+            DataGridViewRow row = showDataGridView.Rows[indexRow];
+            idTextBox.Text = row.Cells[0].Value.ToString();
+            nameTextBox.Text = row.Cells[1].Value.ToString();
+            priceTextBox.Text = row.Cells[2].Value.ToString();
         }
     }
 }

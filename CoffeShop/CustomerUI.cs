@@ -16,6 +16,7 @@ namespace CoffeShop
     public partial class CustomerUI : Form
     {
         CustomerManager _customerManager = new CustomerManager();
+        int indexRow;
         public CustomerUI()
         {
             InitializeComponent();
@@ -130,6 +131,16 @@ namespace CoffeShop
         private void SearchButton_Click(object sender, EventArgs e)
         {
             showDataGridView.DataSource = _customerManager.Search(nameTextBox.Text);
-        } 
+        }
+
+        private void ShowDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            indexRow = e.RowIndex;
+            DataGridViewRow row = showDataGridView.Rows[indexRow];
+            idTextBox.Text = row.Cells[0].Value.ToString();
+            nameTextBox.Text = row.Cells[1].Value.ToString();
+            addressTextBox.Text = row.Cells[2].Value.ToString();
+            contactTextBox.Text = row.Cells[3].Value.ToString();
+        }
     }
 }

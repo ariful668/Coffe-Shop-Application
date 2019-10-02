@@ -111,6 +111,7 @@
             this.showDataGridView.Name = "showDataGridView";
             this.showDataGridView.Size = new System.Drawing.Size(444, 146);
             this.showDataGridView.TabIndex = 18;
+            this.showDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShowDataGridView_CellClick);
             // 
             // showButton
             // 

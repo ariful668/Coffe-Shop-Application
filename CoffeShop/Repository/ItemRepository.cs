@@ -17,7 +17,7 @@ namespace CoffeShop.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -52,7 +52,7 @@ namespace CoffeShop.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -88,7 +88,7 @@ namespace CoffeShop.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -119,7 +119,7 @@ namespace CoffeShop.Repository
         {
            
                 //Connection
-                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -146,7 +146,7 @@ namespace CoffeShop.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -181,7 +181,7 @@ namespace CoffeShop.Repository
             try
             {
                 //Connection
-                string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
+                string connectionString = @"Server=DESKTOP-8RCCAHG; Database=CoffeShop; Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
@@ -204,32 +204,6 @@ namespace CoffeShop.Repository
             }
 
             return dataTable;
-        }
-
-        public DataTable itemCombo()
-        {
-
-            //Connection
-            string connectionString = @"Server=PC-301-11\SQLEXPRESS; Database=CoffeShop; Integrated Security=True";
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-            //Command 
-            string commandString = @"SELECT Id, Name FROM Items";
-            SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-            //Open
-            sqlConnection.Open();
-
-            //Show
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-            DataTable dataTable = new DataTable();
-            sqlDataAdapter.Fill(dataTable);
-
-            //Close
-            sqlConnection.Close();
-
-            return dataTable;
-
-        }
+        }        
     }
 }

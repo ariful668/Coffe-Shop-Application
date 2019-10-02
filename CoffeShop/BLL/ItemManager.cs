@@ -41,9 +41,5 @@ namespace CoffeShop.BLL
             return _itemRepository.Search(name);
         }
 
-        public DataTable itemCombo()
-        {
-            return _itemRepository.itemCombo();
-        }
     }
 }
